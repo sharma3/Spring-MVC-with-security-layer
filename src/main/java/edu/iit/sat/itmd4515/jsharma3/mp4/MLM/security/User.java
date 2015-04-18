@@ -25,33 +25,32 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Jay
  */
 @Entity
-@Table(name = "users")
+@Table(name = "sec_user")
 @NamedQuery(name = "User.findAll", query = "select u from User u")
 public class User implements Serializable {
-    
+
+    private Boolean enabled;
+
     @Id
     private String userName;
     private String password;
-    
+
     @ManyToMany
-    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "USERNAME"),
+    @JoinTable(
+            name = "sec_user_groups",
+            joinColumns = @JoinColumn(name = "USERNAME"),
             inverseJoinColumns = @JoinColumn(name = "GROUPNAME"))
     private List<Group> groups = new ArrayList<>();
-    
-    /**
-     * Get the value of groups
-     *
-     * @return the value of groups
-     */
+
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-    
+
     public User() {
     }
 
-    public void addGroups(Group g) {
+    public void addGroup(Group g) {
         if (!this.groups.contains(g)) {
             this.groups.add(g);
         }
@@ -59,16 +58,43 @@ public class User implements Serializable {
             g.getUsers().add(this);
         }
     }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
+     * Get the value of userName
+     *
+     * @return the value of userName
+     */
     public String getUserName() {
         return userName;
     }
+
+    /**
+     * Set the value of userName
+     *
+     * @param userName new value of userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -76,17 +102,21 @@ public class User implements Serializable {
     public List<Group> getGroups() {
         return groups;
     }
+
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
-   
+
     @PrePersist
     @PreUpdate
     private void hashPassword(){
         String digestPassword = DigestUtils.md5Hex(this.password);
         this.password = digestPassword;
     }
- 
 
+    public Boolean isEnabled() {
+        return enabled;
+    }
 
 }
+

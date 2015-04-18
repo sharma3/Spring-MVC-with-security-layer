@@ -65,10 +65,10 @@ public class DatabasePopulator {
         User michale = new User("michale", "xyz123");
         User anny = new User("anny", "xyz123");
         
-        jack.addGroups(customer);
-        anny.addGroups(customer);
-        david.addGroups(member);
-        michale.addGroups(member);
+        jack.addGroup(customer);
+        david.addGroup(customer);
+        michale.addGroup(member);
+        anny.addGroup(member);
 
         
         Points pt1 = new Points("dg@gmail.com",
@@ -169,8 +169,7 @@ public class DatabasePopulator {
                 );
          ct2.setUser(anny);
          
-         Members m1 = new Members(Boolean.FALSE,
-                 "abc123",
+         Members m1 = new Members("abc123",
                  "David",
                  "Gutta",
                 "dg@gmail.com",
@@ -183,8 +182,7 @@ public class DatabasePopulator {
          ct1.getMembers().add(m1);
          m1.getCustomer().add(ct2);
          ct2.getMembers().add(m1);
-         Members m2 = new Members(Boolean.TRUE,
-                 "pqr123",
+         Members m2 = new Members("pqr123",
                  "Michale",
                  "Clark",
                 "mc@gmail.com",

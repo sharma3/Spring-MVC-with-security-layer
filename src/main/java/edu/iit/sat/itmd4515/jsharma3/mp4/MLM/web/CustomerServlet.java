@@ -50,7 +50,9 @@ public class CustomerServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerServlet at " + request.getContextPath() + "</h1>");
-             if (request.isUserInRole("customer")) {
+             
+            if(request.isUserInRole("customer")) {
+                 
                 Customer ct = customerService.findByUsername(request.getRemoteUser());
                 out.println("<table>");
                 out.println("<tr><td><b>First Name</b></td><td><b>Last Name</b></h2></td><td><b>Email</b></td><td><b>Birthdate</b></td></tr>");

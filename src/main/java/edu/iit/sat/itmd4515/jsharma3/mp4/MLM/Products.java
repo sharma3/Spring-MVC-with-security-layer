@@ -33,7 +33,7 @@ public class Products extends Entities implements Serializable {
     @JoinColumn(name = "Company_ID")
     private Company company;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "combo_item",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "combo_id"))

@@ -56,7 +56,6 @@ public class Members extends Person implements Serializable{
     
     @ManyToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
     private List<Customer> customer = new ArrayList<>();
-    private boolean admin_member;
     
     /**
      *
@@ -85,19 +84,7 @@ public class Members extends Person implements Serializable{
     /**
      *
      * @return
-     */
-    public boolean isAdmin_member() {
-        return admin_member;
-    }
-
-    /**
-     *
-     * @param admin_member
-     */
-    public void setAdmin_member(boolean admin_member) {
-        this.admin_member = admin_member;
-    }
-    
+     */    
     private String referance_code;
 
     /**
@@ -123,9 +110,8 @@ public class Members extends Person implements Serializable{
     public Members() {
     }
 
-    public Members(boolean admin_member, String referance_code, String firstName, String lastName, String email, Date birthDate) {
+    public Members(String referance_code, String firstName, String lastName, String email, Date birthDate) {
         super(firstName, lastName, email, birthDate);
-        this.admin_member = admin_member;
         this.referance_code = referance_code;
     }
 

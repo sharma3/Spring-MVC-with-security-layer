@@ -19,32 +19,25 @@ import javax.persistence.Table;
  * @author Jay
  */
 @Entity
-@Table(name = "groups")
+@Table(name = "sec_group")
 @NamedQuery(name = "Group.findAll", query = "select g from Group g")
 public class Group implements Serializable {
-    
+
     @Id
     private String groupName;
-    private String groupDes;
+    private String groupDesc;
 
     @ManyToMany(mappedBy = "groups")
     private List<User> users = new ArrayList<>();
 
-    /**
-     * Get the value of users
-     *
-     * @return the value of users
-     */
-  
     public Group() {
     }
 
-    public Group(String groupName, String groupDes) {
+    public Group(String groupName, String groupDesc) {
         this.groupName = groupName;
-        this.groupDes = groupDes;
+        this.groupDesc = groupDesc;
     }
 
-    
     public void addUser(User u) {
         if (!this.users.contains(u)) {
             this.users.add(u);
@@ -53,6 +46,12 @@ public class Group implements Serializable {
             u.getGroups().add(this);
         }
     }
+
+    /**
+     * Get the value of groupName
+     *
+     * @return the value of groupName
+     */
     public String getGroupName() {
         return groupName;
     }
@@ -65,27 +64,30 @@ public class Group implements Serializable {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-       
-    public String getGroupDes() {
-        return groupDes;
+
+    /**
+     * Get the value of groupDesc
+     *
+     * @return the value of groupDesc
+     */
+    public String getGroupDesc() {
+        return groupDesc;
     }
 
     /**
-     * Set the value of groupDes
+     * Set the value of groupDesc
      *
-     * @param groupDes new value of groupDes
+     * @param groupDesc new value of groupDesc
      */
-    public void setGroupDes(String groupDes) {
-        this.groupDes = groupDes;
+    public void setGroupDesc(String groupDesc) {
+        this.groupDesc = groupDesc;
     }
-    
+
     public List<User> getUsers() {
         return users;
     }
-    
+
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-
 }
