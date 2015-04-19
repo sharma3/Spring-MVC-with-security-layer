@@ -49,11 +49,13 @@ public class MemberServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MemberServlet at " + request.getContextPath() + "</h1>");
-             if (request.isUserInRole("member")) {
-                Members m = memberService.findByUsername(request.getRemoteUser());
+             
+            if (request.isUserInRole("member")) {
+                
+                Members me = memberService.findByUsername(request.getRemoteUser());
                 out.println("<table>");
                 out.println("<tr><td><b>First Name</b></td><td><b>Last Name</b></h2></td><td><b>Email</b></td><td><b>Birthdate</b></td><td><b>Referance_Code</b></td><td><b>Points</b></td></tr>");
-                out.println("<tr><td>" + m.getFirstName() + "</td><td>" + m.getLastName() + "</td><td>" +m.getEmail() + "</td><td>" + m.getBirthDate() + "</td><td>"+ m.getReferance_code()+"</td><td>" + m.getPnt() + "</td></tr>");
+                out.println("<tr><td>" + me.getFirstName() + "</td><td>" + me.getLastName() + "</td><td>" +me.getEmail() + "</td><td>" + me.getBirthDate() + "</td><td>"+ me.getReferance_code()+"</td><td>" + me.getPnt() + "</td></tr>");
                 out.println("</table>");
                
                
